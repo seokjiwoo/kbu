@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TRhtml4/loose.dtd">
+<html lang="ko-KR">
+	<head>
+		<meta http-equiv="content-type" content="texthtml; charset=utf-8">
+		<title>경복대학교</title>
+		<style type="text/css">
+			html, body {margin:0; padding:0;}
+			html {overflow-y:scroll;}
+			body {color:#666; background-color:#fff; font:12px/1.5 Dotum, '돋움', Verdana, sans-serif;}
+			a {color:#27e; text-decoration:none;}
+			a:focus, a:hover, a:active {text-decoration:underline;}
+			.header {padding:.5em;}
+			.header h1 {display:inline; margin-right:1em; color:#000; font-size:2em;}
+			.header ul {display:inline; font-size:1.5em; list-style:none;}
+			.header ul li {display:inline;}
+			.page p {text-align:right;}
+			.page p strong {color:#f00;}
+			table {width:100%; border-collapse:collapse; border-spacing:0;}
+			table caption {display:none;}
+			table thead th {color:#333; background-color:#eee;}
+			table th, table td {padding:0 .5em; border:1px solid #ddd; text-align:left; font-weight:normal;}
+			table td.stat, table td.date {text-align:center;}
+			.section {margin:3em 0;}
+			body.js .section {margin:0;}
+			.section .title {margin:0; padding:0; color:#000; font-weight:bold; font-size:100%;}
+			body.js .section .title {padding:.5em; border:1px solid #ccc; background-color:#ddd; cursor:pointer;}
+			body.js .section + .section .title {border-top:0;}
+			body.js .section .content {display:none;}
+			table tr:hover {background-color:#f1f1f1;}
+			table tr.yday td {background-color:#FFA460;}
+			table tr.today td {background-color:#fdd7dd;}
+			table tr.modify td {background-color:#ffd9c4;}
+			table tr.point td {background-color:#fff68d;} /*f0fff2 */
+			table tr.point2 td {background-color:#71f5af;}
+			table tr.nouse td {color:#ccc;}
+			.Jump	{margin:0 0 20px;}
+			.modify	{color:red; margin:0;}
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			function status(options) {
+				var settings = jQuery.extend({
+					section: 'div.section',
+					title: 'h2.title',
+					content: 'div.content',
+					files: 'table tbody tr',
+					stat: 'td.stat',
+					speed: 'fast',
+					index: 0,
+					openAll: false
+				}, options),
+					sections = $(settings.section);
+				sections.each(function () {
+					var $this = $(this),
+						title = $this.find(settings.title),
+						text = title.text(),
+						content = $this.find(settings.content),
+						files = content.find(settings.files),
+						completed = 0;
+					files.each(function () {
+						var stat = $(this).find(settings.stat);
+						stat.each(function () {
+							var text = $(this).text();
+							if (text && (text === '●')) {
+								completed++;
+							}
+						});
+					});
+					title.text((text + ' (' + completed + '/' + files.length + ')'));
+					title.bind('click', function () {
+						content.slideToggle(settings.speed);
+					});
+					if (settings.openAll || (settings.index === sections.index(this))) {
+						content.css('display', 'block');
+					}
+				});
+			}
+			$(document).ready(function () {
+				status({ openAll:true });
+			});
+
+		function popUp(str,w,h) {
+		var tarUrl = str;
+		var h_to = h+"," + "scrollbars=no";
+		if(h > 800){
+			w = w + 21;
+			h_to = 800+"," + "scrollbars=yes";
+		}
+		var popInfo = "width="+w+",height="+ h_to;
+		window.open(tarUrl,'',popInfo);
+		}
+		function popUp2(str,w,h) {
+		var tarUrl = str;
+		var popInfo = "width="+w+",height="+h+",scrollbars=yes";
+		window.open(tarUrl,'',popInfo);
+		}
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">document.body.className += ' js';</script>
+		<div class="header">
+			<h1>경복대학교</h1>
+		</div>
+		<div class="page">
+			<p>총 : <strong>00</strong>  page / 완료: <strong>00</strong>  page / 미완료 : <strong>00</strong> page</p>
+		</div>
+		<!--
+		<div class="Jump">
+			<a href="#"></a>
+		</div>
+		-->
+		<div class="section">
+			<h2 class="title">경복대학교</h2>
+			<div class="content">
+				<table>
+					<caption></caption>
+					<thead>
+						<tr>
+							<th scope="col" width="8%">1depth</th>
+							<th scope="col" width="10%">2depth</th>
+							<th scope="col" width="10%">3depth</th>
+							<th scope="col" width="10%">4depth</th>
+							<th scope="col" width="10%">pop</th>
+							<th scope="col" width="15%">path</th>
+							<th scope="col" width="13%">file</th>
+							<th scope="col" width="3%">stat</th>
+							<th scope="col" width="7%">date</th>
+							<th scope="col" width="*">note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--
+						<tr>
+							<td>가이드</td>
+							<td>레이아웃</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/layout.html</td>
+							<td><a href="html/layout.html" target="_blank">layout.html</a></td>
+							<td class="stat">X</td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						-->
+						<tr>
+							<td rowspan="21">대학안내</td>
+							<td rowspan="8">경복소개</td>
+							<td>인사말</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_1.html</td>
+							<td><a href="html/sub/1_1_1.html" target="_blank">1_1_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>설립이념</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_2.html</td>
+							<td><a href="html/sub/1_1_2.html" target="_blank">1_1_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>연혁</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_3.html</td>
+							<td><a href="html/sub/1_1_3.html" target="_blank">1_1_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>경복상징</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_4.html</td>
+							<td><a href="html/sub/1_1_4.html" target="_blank">1_1_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>대학규정</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_5.html</td>
+							<td><a href="html/sub/1_1_5.html" target="_blank">1_1_5.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>조직도</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_6.html</td>
+							<td><a href="html/sub/1_1_6.html" target="_blank">1_1_6.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>캠퍼스안내</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_7.html</td>
+							<td><a href="html/sub/1_1_7.html" target="_blank">1_1_7.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>찾아오시는길</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_1_8.html</td>
+							<td><a href="html/sub/1_1_8.html" target="_blank">1_1_8.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="6">대학기구</td>
+							<td>대학기구표</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_1.html</td>
+							<td><a href="html/sub/1_2_1.html" target="_blank">1_2_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>부속기관</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_2.html</td>
+							<td><a href="html/sub/1_2_2.html" target="_blank">1_2_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>부설교육기관</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_3.html</td>
+							<td><a href="html/sub/1_2_3.html" target="_blank">1_2_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>대학본부</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_4.html</td>
+							<td><a href="html/sub/1_2_4.html" target="_blank">1_2_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>부설연구소</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_5.html</td>
+							<td><a href="html/sub/1_2_5.html" target="_blank">1_2_5.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>산학협력단</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_2_6.html</td>
+							<td><a href="html/sub/1_2_6.html" target="_blank">1_2_6.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="4">세계속의 경복</td>
+							<td>해외무료어학</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_3_1.html</td>
+							<td><a href="html/sub/1_3_1.html" target="_blank">1_3_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>글로벌현장학습</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_3_2.html</td>
+							<td><a href="html/sub/1_3_2.html" target="_blank">1_3_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>해외유학안내</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_3_3.html</td>
+							<td><a href="html/sub/1_3_3.html" target="_blank">1_3_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>해외대학자매결연</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_3_4.html</td>
+							<td><a href="html/sub/1_3_4.html" target="_blank">1_3_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="3">경복소식</td>
+							<td>경복웹진</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_4_2.html</td>
+							<td><a href="html/sub/1_4_2.html" target="_blank">1_4_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>언론이바라본경복</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_4_3.html</td>
+							<td><a href="html/sub/1_4_3.html" target="_blank">1_4_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>구매입찰</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/1_4_4.html</td>
+							<td><a href="html/sub/1_4_4.html" target="_blank">1_4_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>학과안내</td>
+							<td>공학부</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/3_1_1.html</td>
+							<td><a href="html/sub/3_1_1.html" target="_blank">3_1_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="11">학사안내</td>
+							<td>학사일정및행사안내</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_1.html</td>
+							<td><a href="html/sub/4_1.html" target="_blank">4_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="2">학사종합서비스</td>
+							<td>이용안내</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_2_1.html</td>
+							<td><a href="html/sub/4_2_1.html" target="_blank">4_2_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>학사서식자료실</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_2_2.html</td>
+							<td><a href="html/sub/4_2_2.html" target="_blank">4_2_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="8">학사정보</td>
+							<td>수업</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_1.html</td>
+							<td><a href="html/sub/4_3_1.html" target="_blank">4_3_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>학적</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_2.html</td>
+							<td><a href="html/sub/4_3_2.html" target="_blank">4_3_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>교원자격및실기교사</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_3.html</td>
+							<td><a href="html/sub/4_3_3.html" target="_blank">4_3_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>증명서발급</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_4.html</td>
+							<td><a href="html/sub/4_3_4.html" target="_blank">4_3_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>장학</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_5.html</td>
+							<td><a href="html/sub/4_3_5.html" target="_blank">4_3_5.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>병무생활</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_6.html</td>
+							<td><a href="html/sub/4_3_6.html" target="_blank">4_3_6.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>등록</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_7.html</td>
+							<td><a href="html/sub/4_3_7.html" target="_blank">4_3_7.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Q&amp;A</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/4_3_8.html</td>
+							<td><a href="html/sub/4_3_8.html" target="_blank">4_3_8.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="13">대학생활</td>
+							<td rowspan="5">학생활동</td>
+							<td>학생자치기구</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_1_1.html</td>
+							<td><a href="html/sub/5_1_1.html" target="_blank">5_1_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>경복동아리</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_1_2.html</td>
+							<td><a href="html/sub/5_1_2.html" target="_blank">5_1_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>시설물사용신청</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_1_3.html</td>
+							<td><a href="html/sub/5_1_3.html" target="_blank">5_1_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>경복체전</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_1_4.html</td>
+							<td><a href="html/sub/5_1_4.html" target="_blank">5_1_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>지운축제</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_1_5.html</td>
+							<td><a href="html/sub/5_1_5.html" target="_blank">5_1_5.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="2">무료통학버스</td>
+							<td>남양주캠퍼스</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_2_1.html</td>
+							<td><a href="html/sub/5_2_1.html" target="_blank">5_2_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>통학버스FAQ</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_2_3.html</td>
+							<td><a href="html/sub/5_2_3.html" target="_blank">5_2_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="2">공모전</td>
+							<td>UCC공모전</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_3_1.html</td>
+							<td><a href="html/sub/5_3_1.html" target="_blank">5_3_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>이미지공모전</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_3_2.html</td>
+							<td><a href="html/sub/5_3_2.html" target="_blank">5_3_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="4">커뮤니티</td>
+							<td>공지사항</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_4_1.html</td>
+							<td><a href="html/sub/5_4_1.html" target="_blank">5_4_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>FAQ</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_4_2.html</td>
+							<td><a href="html/sub/5_4_2.html" target="_blank">5_4_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Q&A</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_4_3.html</td>
+							<td><a href="html/sub/5_4_3.html" target="_blank">5_4_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>갤러리</td>
+							<td></td>
+							<td></td>
+							<td>html/sub/5_4_4.html</td>
+							<td><a href="html/sub/5_4_4.html" target="_blank">5_4_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td rowspan="5">이용안내(ETC)</td>
+							<td>온라인건의함</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/6_1.html</td>
+							<td><a href="html/sub/6_1.html" target="_blank">6_1.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>자체평가</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/6_2.html</td>
+							<td><a href="html/sub/6_2.html" target="_blank">6_2.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>개인정보보호정책</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/6_3.html</td>
+							<td><a href="html/sub/6_3.html" target="_blank">6_3.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>이메일무단수집거부</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/6_4.html</td>
+							<td><a href="html/sub/6_4.html" target="_blank">6_4.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>홈페이지 개선의견</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>html/sub/6_5.html</td>
+							<td><a href="html/sub/6_5.html" target="_blank">6_5.html</a></td>
+							<td class="stat"></td>
+							<td class="date"></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>경복대학교</title>
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="robots" content="all" />
+	<meta name="description" content="" />
+	<meta name="keyword" content="" />
+	<meta name="author" content="" />
+	<meta name="copyright" content="" />
+	<meta name="reply-to" content="" />
+	<meta name="date" content="" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" /><!-- 일반페이지 공통사용 -->
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script><!-- jquery -->
+	<script type="text/javascript" src="../../js/common.js"></script><!-- 공통 script -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			main_gallery($(".response_obj")[0]);
+			main_gallery($(".response_obj")[2]);
+			main_gallery($(".response_obj")[3]);
+
+			ico_roll("#icon_rolling");//아이콘영역 롤링
+
+			main_contents_toggling();
+		});
+
+		function main_gallery(a){
+			var obj = $(a);
+			var prev = $(".btns .prev", obj)[0];
+			var next = $(".btns .next", obj)[0];
+			var $rollings = $(".rollings", obj);
+			var $li = $("li", $rollings);
+			var before = $li.eq(0);
+
+			if(obj.cnt === undefined) obj.cnt = 0;
+
+			prev.onclick = function(){
+				if(obj.cnt < 1){
+					obj.cnt = $li.size() - 1;
+				}else{
+					obj.cnt--;
+				}
+				list_display();
+			}
+
+			next.onclick = function(){
+				if(obj.cnt < $li.size() - 1){
+					obj.cnt++;
+				}else{
+					obj.cnt = 0;
+				}
+				list_display();
+			};
+
+			function list_display(){
+				if(before != null){
+					before.removeClass("on");
+				}
+				$li.eq(obj.cnt).addClass("on");
+				before = $li.eq(obj.cnt);
+			}
+		}
+
+		function ico_roll(a){
+			var obj = $(a);
+			var prev = $(".prev", obj)[0];
+			var next = $(".next", obj)[0];
+			var ul = $(".icon_list ul", obj);
+
+			prev.onclick = function(){
+				ul.find("li").last().insertBefore(ul.find("li").eq(0));
+				return false;
+			}
+			next.onclick = function(){
+				ul.find("li").eq(0).appendTo(ul);
+				return false;
+			}
+		}
+
+		function main_contents_toggling(){
+			var lnb = $("#main_lnb");
+			var li = $("li", lnb);
+			var before = $("li:eq(0)", lnb);
+			var before_cont = $("#main_tab_cont1");
+			li.click(function(){
+				before.removeClass("on");
+				before_cont.css({
+					"position" : "absolute",
+					"top" : -9999 + "px",
+					"left" : -9999 + "px"
+				});
+				$("#main_tab_cont" + ($(this).index() + 1)).css({
+					"position" : "relative",
+					"top" : 0,
+					"left" : 0
+				});
+				$(this).addClass("on");
+
+				before = $(this);
+				before_cont = $("#main_tab_cont" + ($(this).index() + 1));
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="skipnav">
+		<a href="#contents">컨텐츠 바로가기</a>
+	</div>
+	<div id="wrapper">
+		<div class="main_contents_wrap">
+			<div class="main_lnb" id="main_lnb">
+				<ul>
+					<li class="on"><a href="#"><img src="../../images/main/main_lnb1.gif" alt="소식" /></a></li>
+					<li><a href="#"><img src="../../images/main/main_lnb2.gif" alt="뉴스레터" /></a></li>
+				</ul>
+			</div>
+			<div class="main_wrap" id="main_tab_cont1">
+				<div id="header"><!-- 메인 헤더 -->
+					<div class="header_wrap">
+						<a href="#" class="homemenu"><img src="../../images/common/m_home.gif" alt="home" /></a>
+						<h1><a href="#"><img src="../../images/common/logo.gif" alt="경복대학교 로고" /></a></h1>
+						<div class="nav">
+							<div class="utilmenu">
+								<span class="none">유틸메뉴</span>
+								<ul>
+									<li><a href="#"><img src="../../images/common/utilmenu1.gif" alt="home" /></a></li>
+									<li><a href="#"><img src="../../images/common/utilmenu2.gif" alt="login" /></a></li>
+									<li><a href="#"><img src="../../images/common/utilmenu3.gif" alt="logout" /></a></li>
+									<li><a href="#"><img src="../../images/common/utilmenu4.gif" alt="sitemap" /></a></li>
+									<li><a href="#"><img src="../../images/common/utilmenu5.gif" alt="english" /></a></li>
+								</ul>
+								<span class="search"><input type="image" src="../../images/common/btn_search.gif" alt="검색" /></span>
+							</div>
+							<div class="gnb"><!-- nav버튼 누르면 depth2_on 클래스 추가, li하나가 켜지면 depth3_on 클래스 추가 -->
+								<h2 class="none">주요메뉴</h2>
+								<ul>
+									<li class="gnb1"><a href="#"><span><img src="../../images/common/gnb1.png" alt="경복소개" /></span></a><!-- 마우스 오버시 클래스 on 추가 -->
+										<div class="depth2">
+											<div class="cont">
+												<span class="arrow"></span>
+												<div class="menu_title">
+													<h3>대학안내</h3>
+													<p class="para"><strong>청춘이 만나는 최고의 기회, 경복에 젊음을 걸다!</strong>경복대학교건학이념, 교육목표, 상징을<br />소개합니다.</p>
+													<p class="move_link"><a href="#"><b>대학소개</b> 메인페이지 바로가기</a></p>
+												</div>
+												<div class="menus">
+													<ul>
+														<li><a href="#"><span>경복소개</span></a>
+															<ul>
+																<li><a href="#">인사말</a></li>
+																<li><a href="#">설립이념과 비전</a></li>
+																<li><a href="#">연혁</a></li>
+																<li><a href="#">경복상징</a></li>
+																<li><a href="#">대학규정</a></li>
+																<li><a href="#">조직도</a></li>
+																<li><a href="#">캠퍼스안내</a></li>
+																<li><a href="#">찾아오시는길</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>대학기구</span></a>
+															<ul>
+																<li><a href="#">대학기구표</a></li>
+																<li><a href="#">부속기관</a></li>
+																<li><a href="#">부설교육기관 </a></li>
+																<li><a href="#">대학본부</a></li>
+																<li><a href="#">부설연구소</a></li>
+																<li><a href="#">산학협력단</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>세계속의 경복</span></a>
+															<ul>
+																<li><a href="#">해외무료 어학연수</a></li>
+																<li><a href="#">글로벌현장학습</a></li>
+																<li><a href="#">해외유학안내</a></li>
+																<li><a href="#">해외대학자매결연</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>경복소식</span></a>
+															<ul>
+																<li><a href="#">경복대학교 NEWS</a></li>
+																<li><a href="#">경복웹진</a></li>
+																<li><a href="#">언론이 바라본<br />경복대학교</a></li>
+																<li><a href="#">구매/입찰</a></li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="gnb2"><a href="#"><span><img src="../../images/common/gnb2.png" alt="입학안내" /></span></a></li>
+									<li class="gnb3"><a href="#"><span><img src="../../images/common/gnb3.png" alt="학과안내" /></span></a>
+										<div class="depth2">
+											<div class="cont">
+												<span class="arrow"></span>
+												<div class="menu_title">
+													<h3>학과안내</h3>
+													<p class="para"><strong>청춘이 만나는 최고의 기회, 경복에 젊음을 걸다!</strong>경복대학교건학이념, 교육목표, 상징을<br />소개합니다.</p>
+													<p class="move_link"><a href="#"><b>대학소개</b> 메인페이지 바로가기</a></p>
+												</div>
+												<div class="menus">
+													<ul>
+														<li><a href="#"><span>공학부</span></a></li>
+														<li><a href="#"><span>관광경영학부</span></a></li>
+														<li><a href="#"><span>공공인재학부</span></a></li>
+														<li><a href="#"><span>의료보건학부</span></a></li>
+														<li><a href="#"><span>예술학부</span></a></li>
+														<li><a href="#"><span>의료보건학부</span></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="gnb4"><a href="#"><span><img src="../../images/common/gnb4.png" alt="학사안내" /></span></a>
+										<div class="depth2">
+											<div class="cont">
+												<span class="arrow"></span>
+												<div class="menu_title">
+													<h3>학사안내</h3>
+													<p class="para"><strong>청춘이 만나는 최고의 기회, 경복에 젊음을 걸다!</strong>경복대학교건학이념, 교육목표, 상징을<br />소개합니다.</p>
+													<p class="move_link"><a href="#"><b>대학소개</b> 메인페이지 바로가기</a></p>
+												</div>
+												<div class="menus">
+													<ul>
+														<li><a href="#"><span>학사일정 및 행사안내</span></a></li>
+														<li><a href="#"><span>학사종합서비스</span></a>
+															<ul>
+																<li><a href="#">이용안내</a></li>
+																<li><a href="#">학사서식자료실</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>학사정보</span></a>
+															<ul>
+																<li><a href="#">수업</a></li>
+																<li><a href="#">학적</a></li>
+																<li><a href="#">교원자격 및 실기교사</a></li>
+																<li><a href="#">증명서발급</a></li>
+																<li><a href="#">장학</a></li>
+																<li><a href="#">병무안내</a></li>
+																<li><a href="#">등록</a></li>
+																<li><a href="#">Q&amp;A</a></li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="gnb5"><a href="#"><span><img src="../../images/common/gnb5.png" alt="대학생활" /></span></a>
+										<div class="depth2">
+											<div class="cont">
+												<span class="arrow"></span>
+												<div class="menu_title">
+													<h3>대학생활</h3>
+													<p class="para"><strong>청춘이 만나는 최고의 기회, 경복에 젊음을 걸다!</strong>경복대학교건학이념, 교육목표, 상징을<br />소개합니다.</p>
+													<p class="move_link"><a href="#"><b>대학소개</b> 메인페이지 바로가기</a></p>
+												</div>
+												<div class="menus">
+													<ul>
+														<li><a href="#"><span>학생활동</span></a>
+															<ul>
+																<li><a href="#">학생자치기구</a></li>
+																<li><a href="#">경복동아리</a></li>
+																<li><a href="#">시설물사용신청</a></li>
+																<li><a href="#">경복체전</a></li>
+																<li><a href="#">지운축제</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>학생생활공간</span></a>
+															<ul>
+																<li><a href="#">벼룩시장</a></li>
+																<li><a href="#">아르바이트정보</a></li>
+																<li><a href="#">분실물/습득물 신고</a></li>
+																<li><a href="#">식단안내</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>통학버스</span></a>
+															<ul>
+																<li><a href="#">남양주캠퍼스</a></li>
+																<li><a href="#">포천캠퍼스</a></li>
+																<li><a href="#">통학버스 FAQ</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>공모전</span></a>
+															<ul>
+																<li><a href="#">UCC공모전</a></li>
+																<li><a href="#">이미지공모전</a></li>
+															</ul>
+														</li>
+														<li><a href="#"><span>커뮤니티</span></a>
+															<ul>
+																<li><a href="#">공지사항</a></li>
+																<li><a href="#">경복포스터</a></li>
+																<li><a href="#">교내Poll</a></li>
+																<li><a href="#">FAQ</a></li>
+																<li><a href="#">Q&amp;A</a></li>
+																<li><a href="#">갤러리</a></li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="gnb6"><a href="#"><span><img src="../../images/common/gnb6.png" alt="e-서비스" /></span></a></li>
+								</ul>
+							</div>
+						</div>
+						<a href="#" class="m_nav"><img src="../../images/common/m_nav.gif" alt="" /></a>
+					</div>
+				</div>
+
+				<hr />
+
+				<div class="main_body"><!-- 메인 컨텐츠 -->
+					<div class="main_responsive">
+						<h3>주요이슈</h3>
+						<div class="response_obj main_response1"><!-- 메인 responsive1 -->
+							<div class="contains">
+								<div class="rollings">
+									<ul>
+										<li class="on"><a href="#"><img src="../../images/main/img_response1_1.jpg" alt="" /></a></li>
+										<li><a href="#"><img src="../../images/main/img_response1_2.jpg" alt="" /></a></li>
+									</ul>
+								</div>
+								<p class="btns">
+									<button type="button" class="btn_type1 prev"><span>이전</span></button>
+									<button type="button" class="btn_type1 next"><span>다음</span></button>
+								</p>
+							</div>
+						</div>
+						<div class="response_obj main_response2"><!-- 메인 responsive2 -->
+							<div class="contains">
+								<p class="image"><a href="#"><img src="../../images/main/img_response2_1.jpg" alt="" /></a></p>
+								<dl>
+									<dt><a href="#"><span>2014학년도 </span>정시 1차 모집안내</a></dt>
+									<dd><span>원서접수 </span>2013.12.20(화) ~ 2014. 1. 10(금)</dd>
+								</dl>
+							</div>
+						</div>
+						<div class="response_obj main_response3"><!-- 메인 responsive3 -->
+							<div class="contains">
+								<div class="rollings">
+									<ul>
+										<li class="on">
+											<a href="#">
+												<img src="../../images/main/img_response3_1.jpg" class="big_img" alt="" />
+												<img src="../../images/main/img_response3_1_s.jpg" class="small_img" alt="" />
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<img src="../../images/main/img_response3_2.jpg" class="big_img" alt="" />
+												<img src="../../images/main/img_response3_2_s.jpg" class="small_img" alt="" />
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<img src="../../images/main/img_response3_3.jpg" class="big_img" alt="" />
+												<img src="../../images/main/img_response3_3_s.jpg" class="small_img" alt="" />
+											</a>
+										</li>
+									</ul>
+								</div>
+								<p class="btns">
+									<button type="button" class="btn_type1 prev"><span>이전</span></button>
+									<button type="button" class="btn_type1 next"><span>다음</span></button>
+								</p>
+							</div>
+						</div>
+						<div class="response_obj main_response4"><!-- 메인 responsive4 -->
+							<div class="contains">
+								<div class="rollings">
+									<ul>
+										<li class="on">
+											<a href="#"><img src="../../images/main/img_response4_1.jpg" alt="" /></a>
+											<dl class="text_layer">
+												<dt>11중소기업을 위한 창의적 산학협력</dt>
+												<dd>11고용노동부 장관 초청간담회 경복대학교에서 열렸습니다.</dd>
+											</dl>
+										</li>
+										<li><a href="#"><img src="../../images/main/img_response4_2.jpg" alt="" /></a>
+											<dl class="text_layer">
+												<dt>222중소기업을 위한 창의적 산학협력</dt>
+												<dd>22고용노동부 장관 초청간담회 경복대학교에서 열렸습니다.</dd>
+											</dl>
+										</li>
+										<li><a href="#"><img src="../../images/main/img_response4_3.jpg" alt="" /></a>
+											<dl class="text_layer">
+												<dt>333중소기업을 위한 창의적 산학협력</dt>
+												<dd>33고용노동부 장관 초청간담회 경복대학교에서 열렸습니다.</dd>
+											</dl>
+										</li>
+									</ul>
+								</div>
+								<p class="btns">
+									<button type="button" class="btn_type1 prev"><span>이전</span></button>
+									<button type="button" class="btn_type1 next"><span>다음</span></button>
+								</p>
+							</div>
+						</div>
+						<div class="response_obj main_response5"><!-- 메인 responsive5 -->
+							<div class="contains">
+								<p class="image"><img src="../../images/main/img_response5_1.jpg" alt="" /></p>
+								<dl class="text_layer">
+									<dt>KYUNGBOK</dt>
+									<dd>홍보동영상</dd>
+								</dl>
+								<a href="#" class="vod_btn"><img src="../../images/main/btn_vod_play.png" alt="" /></a>
+							</div>
+						</div>
+						<div class="response_obj main_response6"><!-- 메인 responsive6 -->
+							<div class="contains">
+								<p class="image"><a href="#"><img src="../../images/main/img_response6_1.jpg" alt="" /></a></p>
+							</div>
+						</div>
+						<div class="response_obj main_response7"><!-- 메인 responsive7 -->
+							<div class="contains">
+								<p class="image"><a href="#"><img src="../../images/main/img_response7_1.jpg" alt="" /></a></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="icon_wrap">
+						<h3><img src="../../images/main/title_main_h3_icon_wrap.gif" alt="국제적으로 통용되는 공인 전문인력 양성 Be a Specialist at Kyungbok" /></h3>
+						<div class="rollings" id="icon_rolling">
+							<p class="prev"><a href="#"><img src="../../images/main/main_arrow_left.png" alt="이전" /></a></p>
+							<p class="next"><a href="#"><img src="../../images/main/main_arrow_right.png" alt="다음" /></a></p>
+							<div class="icon_list">
+								<ul>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon1.gif" alt="학사종합서비스" /></span>
+											<span class="text">학사종합서비스</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon2.gif" alt="학사일정" /></span>
+											<span class="text">학사일정</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon3.gif" alt="취업관리" /></span>
+											<span class="text">취업관리</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon4.gif" alt="중앙도서관" /></span>
+											<span class="text">중앙도서관</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon5.gif" alt="인터넷증명발급" /></span>
+											<span class="text">인터넷증명발급</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="image"><img src="../../images/main/main_icon6.gif" alt="전화번호검색" /></span>
+											<span class="text">전화번호검색</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="article_section"><!-- 독립적인 컨텐츠 article 영역 -->
+						<div class="article_wrap first">
+							<div class="event_plan">
+								<h3>행사일정</h3>
+								<ul>
+									<li>
+										<span class="date"><strong>4.5</strong>Fri</span>
+										<dl class="summary">
+											<dt><a href="#">사회교육관 / 창업보육센터 기공식</a></dt>
+											<dd><a href="#">창업보육센터 설립으로 지역경제 활성화 기대! 경복대학교는 4월5일 남양주캠퍼스에서 사회교육관 / 창업보육센터 기공식을 가졌다.</a></dd>
+										</dl>
+									</li>
+									<li>
+										<span class="date"><strong>4.5</strong>Fri</span>
+										<dl class="summary">
+											<dt><a href="#">사회교육관 / 창업보육센터 기공식</a></dt>
+											<dd><a href="#">창업보육센터 설립으로 지역경제 활성화 기대! 경복대학교는 4월5일 남양주캠퍼스에서 사회교육관 / 창업보육센터 기공식을 가졌다.</a></dd>
+										</dl>
+									</li>
+									<li>
+										<span class="date"><strong>4.5</strong>Fri</span>
+										<dl class="summary">
+											<dt><a href="#">사회교육관 / 창업보육센터 기공식</a></dt>
+											<dd><a href="#">창업보육센터 설립으로 지역경제 활성화 기대! 경복대학교는 4월5일 남양주캠퍼스에서 사회교육관 / 창업보육센터 기공식을 가졌다.</a></dd>
+										</dl>
+									</li>
+									<li>
+										<span class="date"><strong>4.5</strong>Fri</span>
+										<dl class="summary">
+											<dt><a href="#">사회교육관 / 창업보육센터 기공식</a></dt>
+											<dd><a href="#">창업보육센터 설립으로 지역경제 활성화 기대! 경복대학교는 4월5일 남양주캠퍼스에서 사회교육관 / 창업보육센터 기공식을 가졌다.</a></dd>
+										</dl>
+									</li>
+									<li>
+										<span class="date"><strong>4.5</strong>Fri</span>
+										<dl class="summary">
+											<dt><a href="#">사회교육관 / 창업보육센터 기공식</a></dt>
+											<dd><a href="#">창업보육센터 설립으로 지역경제 활성화 기대! 경복대학교는 4월5일 남양주캠퍼스에서 사회교육관 / 창업보육센터 기공식을 가졌다.</a></dd>
+										</dl>
+									</li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+						</div>
+						<div class="article_wrap">
+							<div class="kb_news">
+								<h3>경복뉴스</h3>
+								<p class="news_image"><a href="#"><img src="../../images/main/img_kb_news.jpg" alt="경복뉴스" /></a></p>
+								<dl>
+									<dt><a href="#">경복대학교, 대한민국 교육기부대회 대상</a></dt>
+									<dd><a href="#">경복대학교는 12월 16일 더 플라자 호텔 그랜드볼륨에서 교육부가 주최하고 한국과학창의재단이 주관하는 ‘제2회 대한민국 교육기부대회’에서 교육기부대상을 수상했다.</a></dd>
+								</dl>
+								<ul class="other_news">
+									<li><a href="#">경복대학교 ‘교육역량강화사업 지원 대학’으로 선정 경복대학교 ‘교육역량강화사업 지원 대학’으로 선정</a></li>
+									<li><a href="#">경복대학교, 대학중심 평생학습 활성화 지원사업</a></li>
+									<li><a href="#">경복대학교 2013 경인 히트상품 대상</a></li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+							<div class="masscom">
+								<h3>언론이 바라본 경복</h3>
+								<ul class="other_news">
+									<li><a href="#">경복대학교 ‘교육역량강화사업 지원 대학’으로 선정</a></li>
+									<li><a href="#">경복대학교, 대학중심 평생학습 활성화 지원사업 경복대학교, 대학중심 평생학습 활성화 지원사업</a></li>
+									<li><a href="#">경복대학교 2013 경인 히트상품 대상</a></li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+						</div>
+						<div class="article_wrap">
+							<div class="board_notice">
+								<h3>공지사항</h3>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+								<ul class="main_news">
+									<li class="notice"><a href="#">[학사] 경복대학교와 아하정보통신 DLP TV 기증식</a></li>
+									<li class="notice"><a href="#">[공지] 경복대학교, 대한민국 교육기부대회 대상...</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, 7개학과 학사학위 전공심 경복대학교, 7개학과 학사학위 전공심</a></li>
+									<li><a href="#">[학사] 경복대학교, 서울중앙지방법무사회와 산학...</a></li>
+									<li><a href="#">[학사] 경복대학교, 서울중앙지방법무사회와 산학...</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, KCC정보통신(주)과 산학 ...</a></li>
+									<li><a href="#">[학사] 호텔관광과 강원도 하이원리조트 견학</a></li>
+								</ul>
+							</div>
+							<div class="recruitment">
+								<h3>채용소식</h3>
+								<ul class="main_news">
+									<li class="notice"><a href="#">[학사] 경복대학교와 아하정보통신 DLP TV 기증식</a></li>
+									<li class="notice"><a href="#">[공지] 경복대학교, 대한민국 교육기부대회 대상...</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, 7개학과 학사학위 전공심 경복대학교, 7개학과 학사학위 전공심</a></li>
+									<li><a href="#">[학사] 경복대학교, 서울중앙지방법무사회와 산학...</a></li>
+									<li><a href="#">[학사] 경복대학교, 서울중앙지방법무사회와 산학...</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, KCC정보통신(주)과 산학 ...</a></li>
+									<li><a href="#">[학사] 호텔관광과 강원도 하이원리조트 견학</a></li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="section_banner_zone">
+						<ul>
+							<li><a href="#"><img src="../../images/main/banner_main1.gif" alt="" /></a></li>
+							<li><a href="#"><img src="../../images/main/banner_main2.gif" alt="" /></a></li>
+							<li><a href="#"><img src="../../images/main/banner_main3.gif" alt="" /></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<hr />
+
+				<div id="footers">
+					<div class="foot_wrap">
+						<p class="qr_code"><a href="#"><img src="../../images/common/foot_logo.gif" alt="" /></a></p>
+						<div class="info">
+							<ul>
+								<li><a href="#"><img src="../../images/common/footer_menu1.gif" alt="온라인건의함" /></a></li>
+								<li><a href="#"><img src="../../images/common/footer_menu2.gif" alt="자체평가" /></a></li>
+								<li><a href="#"><img src="../../images/common/footer_menu3.gif" alt="개인정보보호정책" /></a></li>
+								<li><a href="#"><img src="../../images/common/footer_menu4.gif" alt="이메일무단수집거부" /></a></li>
+								<li><a href="#"><img src="../../images/common/footer_menu5.gif" alt="홈페이지개선의견" /></a></li>
+								<li class="last"><a href="#"><img src="../../images/common/footer_menu6.gif" alt="예결산및등록금심의회의록" /></a></li>
+							</ul>
+							<address><img src="../../images/common/footer_address.gif" alt="남양주캠퍼스  (우)472-948 경기도 남양주시 진접읍 경복대로 425 / Tel:031-570-9901~6 / FAX :031-570-9929 포천캠퍼스     (우)487-717 경기도 포천시 신북면 신평로 154 / Tel:031-531-9901~6 / FAX:031-531-9908 COPYRIGHT(C) 2013 KYUNGBOK UNIVERSITY.  ALL RIGHTS RESERVED." /></address>
+						</div>
+						<div class="selects">
+							<div class="select_style1" style="width:197px;">
+								<p class="button"><a href="#">교육원</a></p>
+								<ul>
+									<li><a href="#" target="_blank" title="링크1 - 새 창">링크1</a></li>
+									<li><a href="#" target="_blank" title="링크2 - 새 창">링크2</a></li>
+									<li><a href="#" target="_blank" title="링크3 - 새 창">링크3</a></li>
+									<li><a href="#" target="_blank" title="링크4 - 새 창">링크4</a></li>
+									<li><a href="#" target="_blank" title="링크5 - 새 창">링크5</a></li>
+								</ul>
+							</div>
+							<div class="select_style1" style="width:197px;">
+								<p class="button"><a href="#">부속/부설기관</a></p>
+								<ul>
+									<li><a href="#" target="_blank" title="링크1 - 새 창">링크1</a></li>
+									<li><a href="#" target="_blank" title="링크2 - 새 창">링크2</a></li>
+									<li><a href="#" target="_blank" title="링크3 - 새 창">링크3</a></li>
+									<li><a href="#" target="_blank" title="링크4 - 새 창">링크4</a></li>
+									<li><a href="#" target="_blank" title="링크5 - 새 창">링크5</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="m_foot">
+						<div class="menus">
+							<p><a href="#" class="find_way"><img src="../../images/common/m_foot1.gif" alt="찾아오시는 길" /></a></p>
+							<p><a href="#"><img src="../../images/common/m_foot2.gif" alt="PC 버전" /></a></p>
+						</div>
+						<p class="copyright">Copyright (c) 2014 KYUNGBOK UNIVERSITY. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+			<div class="main_wrap" id="main_tab_cont2" style="position:absolute; top:-9999px; left:-9999px;">
+				<iframe src="http://news.kbu.ac.kr/" border="0" frameborder="0" marginwidth="0" marginheight="0" height="100%" allowtransparency="true" scrolling="no"></iframe>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

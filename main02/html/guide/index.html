@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>경복대학교</title>
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="robots" content="all" />
+	<meta name="description" content="" />
+	<meta name="keyword" content="" />
+	<meta name="author" content="" />
+	<meta name="copyright" content="" />
+	<meta name="reply-to" content="" />
+	<meta name="date" content="" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" /><!-- 일반페이지 공통사용 -->
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script><!-- jquery -->
+	<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script><!-- easing -->
+	<script type="text/javascript" src="../../js/common.js"></script><!-- 공통 script -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			initMenu();
+			initEventListener();
+			startAutoPlay();
+			pop_close();
+			ico_list();
+		});
+
+		/* 메인슬라이더 */
+		var BANNER_WIDTH = 834;
+		var SHOW_DURATION = 500;
+		var AUTO_PLAY_TIME = 2000;
+		var $banner_content;
+		var nBannerLength = 0;
+		var nCurrentBannerIndex = 0;
+		var $banner_dots;
+		var autoTImerID;
+
+		function initMenu(){
+			$banner_content = $(".banner_content");
+			nBannerLength = $banner_content.children("a").length;
+			$banner_content.width(BANNER_WIDTH * nBannerLength);
+			$banner_dots = $(".banner_nav li a");
+			showBannerDotAt(0);
+			autoTImerID = 0;
+		}
+		function initEventListener(){
+			$("#btn_prev_banner").on("click", function(){
+				startAutoPlay();
+			});
+			$("#btn_next_banner").on("click", function(){
+				stopAutoPlay();
+			});
+			$banner_dots.on("mouseenter",function(){
+				var nIndex = $banner_dots.index(this);
+				showBannerAt(nIndex);
+			})
+			var $banner_slider = $("div.banner_slider");
+			$banner_slider.on("mouseenter",function(){
+				stopAutoPlay();
+			});
+			$banner_slider.on("mouseleave",function(){
+				startAutoPlay();
+			});
+		}
+		function prevBanner(){
+			var nIndex = this.nCurrentBannerIndex-1;
+			if(nIndex<0)
+				nIndex = this.nBannerLength-1;
+			this.showBannerAt(nIndex);
+		}
+		function nextBanner(){
+			var nIndex = this.nCurrentBannerIndex+1;
+			if(nIndex>=nBannerLength)
+				nIndex = 0;
+			this.showBannerAt(nIndex);
+		}
+		function showBannerAt(nIndex){
+			if (nIndex != this.nCurrentBannerIndex) {
+				var nPosition = -BANNER_WIDTH * nIndex;
+				this.showBannerDotAt(nIndex);
+				$banner_content.stop();
+				$banner_content.animate({
+					left: nPosition
+				}, SHOW_DURATION, "easeOutQuint");
+				this.nCurrentBannerIndex = nIndex;
+			}
+		}
+		function showBannerDotAt(nIndex){
+			this.$banner_dots.eq(this.nCurrentBannerIndex).removeClass("on");
+			this.$banner_dots.eq(nIndex).addClass("on");
+		}
+		function startAutoPlay(){
+			if(this.autoTimerID!=0)
+				clearInterval(this.autoTimerID);
+
+			this.autoTimerID = setInterval(function(){
+				nextBanner();
+			},this.AUTO_PLAY_TIME);
+		}
+		function stopAutoPlay(){
+			if(this.autoTimerID!=0)
+				clearInterval(this.autoTimerID);
+			this.autoTimerID = 0;
+		}
+		/* 팝업닫기 */
+		function pop_close(){
+			var pop_close = $('.pop_close');
+			pop_close.on('click',function(){
+				$(this).parent().remove();
+			})
+		}
+		/* 지원자서비스 */
+		function ico_list(){
+			var board_notice2a = $('.board_notice2 ul > li > a');
+			var board_notice2li = $('.board_notice2 ul > li');
+			board_notice2a.on('click',function(){
+				var list_Index = board_notice2a.index(this);
+				board_notice2li.eq(list_Index).addClass('on')
+				board_notice2li.not(board_notice2li.eq(list_Index)).removeClass('on')
+				return false;
+			});
+		}
+
+	</script>
+</head>
+<body>
+	<div class="skipnav">
+		<a href="#contents">컨텐츠 바로가기</a>
+	</div>
+	<div id="wrapper">
+		<div class="main_contents_wrap">
+			<div class="main_lnb" id="main_lnb">
+				<ul>
+					<li class="on"><a href="#"><img src="../../images/main/main_lnb3.gif" alt="경복홈" /></a></li>
+					<li><a href="#"><img src="../../images/main/main_lnb5.gif" alt="뉴스레터" /></a></li>
+					<li class="on"><a href="#"><img src="../../images/main/main_lnb4.gif" alt="경복NEWS" /></a></li>
+				</ul>
+			</div>
+			<div class="main_wrap" id="main_tab_cont1">
+				<div class="pop_area">
+					<ul>
+						<li><a href="#"><img src="../../images/main/pop_1.jpg" alt="" /></a></li>
+						<li><a href="#"><img src="../../images/main/pop_2.jpg" alt="" /></a></li>
+						<li><a href="#"><img src="../../images/main/pop_3.jpg" alt="" /></a></li>
+						<li><a href="#"><img src="../../images/main/pop_4.jpg" alt="" /></a></li>
+					</ul>
+					<a href="#" class="pop_close"><span>7일간 보이지 않기</span><img src="../../images/main/pop_xbtn.jpg" alt="팝업닫기" /></a>
+				</div>
+				<div class="header_wrapper">
+					<div id="header">
+						<h1><img src="../../images/common/logo.gif" alt="경복대학교 로고" /></h1>
+						<div class="utilmenu">
+							<ul>
+								<li class="utilmenu1">
+									<ul>
+										<li><a href="#">회원가입</a></li>
+										<li><a href="#">로그인</a></li>
+										<li><a href="#">사이트맵</a></li>
+									</ul>
+								</li>
+								<li>
+									<input type="text" class="searchbox" />
+									<span class="search"><a href="#"><img src="../../images/common/btn_search.gif" alt="검색" /></a></span>
+								</li>
+								<li>
+									<ul>
+										<li><a href="#"><img src="../../images/common/btn_blog.gif" alt="블로그" /></a></li>
+										<li><a href="#"><img src="../../images/common/btn_twitter.gif" alt="트위터" /></a></li>
+										<li><a href="#"><img src="../../images/common/btn_facebook.gif" alt="페이스북" /></a></li>
+										<li><a href="#"><img src="../../images/common/btn_utube.gif" alt="유튜브" /></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="navi">
+							<ul>
+								<li><a href="#">수시</a></li>
+								<li><a href="#">정시</a></li>
+								<li><a href="#">전공심화</a></li>
+								<li><a href="#">산업체위탁교육</a></li>
+								<li><a href="#">계약학과</a></li>
+								<li><a href="#">입학상담</a></li>
+								<li><a href="#">지원자서비스</a></li>
+								<li><a href="#">학과소개</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<hr />
+				<div class="main_body_new"><!-- 메인 컨텐츠 -->
+					<div class="main_responsive_new">
+						<div class="slide_area">
+							<div class="banner_container">
+								<div class="stop_play">
+									<a href="#" id="btn_prev_banner"><img src="../../images/main/slide_play.jpg" alt="재생" /></a>
+									<a href="#" id="btn_next_banner"><img src="../../images/main/slide_stop.jpg" alt="정지" /></a></a>
+								</div>
+								<ul class="banner_nav">
+									<li><a href="#" rel="1"></a></li>
+									<li><a href="#" rel="2"></a></li>
+									<li><a href="#" rel="3"></a></li>
+								</ul>
+								<div class="banner_content">
+									<a href="#"><img src="../../images/main/slide_1.jpg" alt="" /></a>
+									<a href="#"><img src="../../images/main/slide_2.jpg" alt="" /></a>
+									<a href="#"><img src="../../images/main/slide_3.jpg" alt="" /></a>
+								</div>
+							</div>
+							<div class="right_bnr"><a href="#"><img src="../../images/main/right_bnr.jpg" alt="2014정시 모집안내 원서접수:2031.12.20(금)~201401.13(월)합격자발표:2014.1.28(화)원서접수바로가기" /></a></div>
+						</div>
+					</div>
+
+					<div class="article_section_new"><!-- 독립적인 컨텐츠 article 영역 -->
+						<div class="article_wrap_new first">
+							<div class="event_plan_new boxbg1">
+								<h3>입학일정</h3>
+								<div class="calendar_st1 mt28">
+									<div class="head">
+										<a href="#"><img src="../../images/main/calendar_left.jpg" alt="한달뒤로가기" /></a>
+										<span>2014.01</span>
+										<a href="#"><img src="../../images/main/calendar_right.jpg" alt="한달앞으로가기" /></a>
+									</div>
+									<table class="mt15" summary="일,월,화,수,목,금,토,일 항목으로 구성되어 있습니다.">
+										<caption>달력을 표시하는 표입니다.</caption>
+										<thead>
+											<tr>
+												<th scope="col">일</th>
+												<th scope="col">월</th>
+												<th scope="col">화</th>
+												<th scope="col">수</th>
+												<th scope="col">목</th>
+												<th scope="col">금</th>
+												<th scope="col">토</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td class="sat">4</td>
+											</tr>
+											<tr>
+												<td class="sun">5</td>
+												<td>6</td>
+												<td>7</td>
+												<td>8</td>
+												<td>9</td>
+												<td>10</td>
+												<td class="sat">11</td>
+											</tr>
+											<tr>
+												<td class="sun">12</td>
+												<td>13</td>
+												<td class="on">14</td>
+												<td>15</td>
+												<td>16</td>
+												<td>17</td>
+												<td class="sat">18</td>
+											</tr>
+											<tr>
+												<td class="sun">19</td>
+												<td>20</td>
+												<td>21</td>
+												<td>22</td>
+												<td>23</td>
+												<td>24</td>
+												<td class="sat">25</td>
+											</tr>
+											<tr>
+												<td class="sun">26</td>
+												<td>27</td>
+												<td>28</td>
+												<td>29</td>
+												<td>30</td>
+												<td>31</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+								<ul class="period mt34">
+									<li><strong>12월 20일~01월 13일</strong>  정시모집 접수기간 </li>
+									<li><strong>01월 03일~22일</strong>  학사학위 전공심화과정 접수기간 </li>
+									<li><strong>01월 10일~02월 10일</strong>  산업체 위탁교육 접수기간 </li>
+									<li><strong>01월 17일</strong>  정시모집 면접(실기고사)일 </li>
+									<li><strong>01월 25일</strong>  학사학위 전공심화과정 면접일 </li>
+									<li><strong>01월 28일</strong>  정시모집, 학사학위 전공심화과정 합격자 발표 </li>
+								</ul>
+							</div>
+						</div>
+						<div class="article_wrap_new">
+							<div class="notice_news boxbg1">
+								<h3>공지사항</h3>
+								<ul class="notice_list">
+									<li class="notice"><a href="#">[학사] 경복대학교와 아하정보통신 DLP TV 기증식</a></li>
+									<li class="notice"><a href="#">[공지] 경복대학교, 대한민국 교육기부대회 대상...</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, 7개학과 학사학위 전공심...</a></li>
+									<li><a href="#">[학사] 경복대학교, 서울중앙지방법무사회와 산학...</a></li>
+									<li><a href="#">[공지] 경복대학교, 자랑스런 전문대학인을 배출하다</a></li>
+									<li><a href="#">[입찰통합] 경복대학교, KCC정보통신(주)과 산학 ...</a></li>
+									<li><a href="#">[학사] 호텔관광과 강원도 하이원리조트 견학</a></li>
+									<li><a href="#">2014-1학기 학자금대출 안내</a></li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+							<div class="qna_list mt10 boxbg1">
+								<h3>FAQ | Q&A</h3>
+								<ul class="other_news">
+									<li class="at"><a href="#">중복지원(2개 학과 또는 1개 학과 다른 전형) 지원이</a></li>
+									<li class="at"><a href="#">인문계 문과학생도 자연과학이나 공학계열에 지원할</a></li>
+									<li><a href="#">일반전형과 특별전형은 무엇인가요?</a></li>
+									<li><a href="#">수능을 응시하지 않았는데 지원할 수 있나요?</a></li>
+									<li><a href="#">제 성적으로 합격할 수 있을까요?</a></li>
+									<li><a href="#">제 성적으로 합격할 수 있을까요?</a></li>
+									<li><a href="#">제 성적으로 합격할 수 있을까요?</a></li>
+								</ul>
+								<a href="#" class="more"><img src="../../images/main/btn_more.gif" alt="더보기" /></a>
+							</div>
+						</div>
+						<div class="article_wrap_new">
+							<div class="board_notice2 boxbg1">
+								<h3>지원자서비스</h3>
+								<ul>
+									<li class="on"><a href="#" class="ico01"><span>경쟁률</span></a></li>
+									<li><a href="#" class="ico02"><span>과년도입학성적/<br />경쟁률</span></a></li>
+									<li><a href="#" class="ico03"><span>내신성적산출</span></a></li>
+									<li><a href="#" class="ico04"><span>등록금안내</span></a></li>
+									<li><a href="#" class="ico05"><span>장학금/학자금안내</span></a></li>
+									<li><a href="#" class="ico06"><span>원서접수확인</span></a></li>
+									<li><a href="#" class="ico07"><span>지원자연락처변경</span></a></li>
+									<li><a href="#" class="ico08"><span>적성검사 </span></a></li>
+									<li><a href="#" class="ico09"><span>면접/실기안내</span></a></li>
+								</ul>
+							</div>
+							<div class="recruitment2 boxbg1 mt10">
+								<h3>실시간SNS</h3>
+								<ul>
+									<li>
+										<a href="#">
+											<img src="../../images/main/sum_img.jpg" alt="더보기" />
+											<span>
+												<span><em>경인종합일보</em> @lim1424010</span>
+												[경인종합일보 김형천 기자] 경기도 의회 김경호의장이
+												경복대학교 초빙교수로 위촉됐다.
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<img src="../../images/main/sum_img.jpg" alt="더보기" />
+											<span>
+												<span><em>경인종합일보</em> @lim1424010</span>
+												[경인종합일보 김형천 기자] 경기도 의회 김경호의장이
+												경복대학교 초빙교수로 위촉됐다.
+											</span>
+										</a>
+									</li>
+								</ul>
+								<p class="ico_s">
+									<span>소셜로그인 &gt;</span>
+									<a href="#"><img src="../../images/main/ico_f.jpg" alt="페이스북" /></a>
+									<a href="#"><img src="../../images/main/ico_t.jpg" alt="트위터" /></a>
+								</p>
+								<p class="sns_btn">
+									<a href="#"><img src="../../images/main/sns_prev.jpg" alt="이전" /></a>
+									<a href="#"><img src="../../images/main/sns_next.jpg" alt="다음" /></a>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="section_banner_zone_new">
+						<ul>
+							<li><a href="#"><img src="../../images/main/banner_main5.gif" alt="" /></a></li>
+							<li><a href="#"><img src="../../images/main/banner_main6.gif" alt="" /></a></li>
+							<li><a href="#"><img src="../../images/main/banner_main3.gif" alt="" /></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="site_list mt10">
+					<div>
+						<dl>
+							<dt>공지사항</dt>
+							<dd><a href="#">수시</a></dd>
+							<dd><a href="#">정시</a></dd>
+							<dd><a href="#">전공심화</a></dd>
+							<dd><a href="#">산업체위탁교육</a></dd>
+							<dd><a href="#">계약학과</a></dd>
+						</dl>
+						<dl>
+							<dt>입학상담</dt>
+							<dd><a href="#">공지사항</a></dd>
+							<dd><a href="#">FAQ</a></dd>
+							<dd><a href="#">Q&A</a></dd>
+							<dd><a href="#">자료실</a></dd>
+						</dl>
+						<dl>
+							<dt>지원자서비스</dt>
+							<dd><a href="#">경쟁률</a></dd>
+							<dd><a href="#">과년도 입학성적/경쟁률</a></dd>
+							<dd><a href="#">내신 성적 산출</a></dd>
+							<dd><a href="#">등록금 안내</a></dd>
+							<dd><a href="#">장학금/학자금안내</a></dd>
+							<dd><a href="#">원서접수확인/제출서류도착확인</a></dd>
+							<dd><a href="#">지원자연락처변경</a></dd>
+							<dd><a href="#">적성검사</a></dd>
+							<dd><a href="#">면접/실기안내</a></dd>
+						</dl>
+						<dl>
+							<dt>합격자서비스</dt>
+							<dd><a href="#">합격자조회/고지서출력</a></dd>
+							<dd><a href="#">등록금 납부확인</a></dd>
+							<dd><a href="#">오리엔테이션</a></dd>
+							<dd><a href="#">교과서 배부안내</a></dd>
+							<dd><a href="#">등록금 환불신청</a></dd>
+						</dl>
+						<dl>
+							<dt>취업보장학과</dt>
+							<dd><a href="#">임베디드전공</a></dd>
+							<dd><a href="#">토탈웹서비스전공</a></dd>
+							<dd><a href="#">IT보안과</a></dd>
+							<dd><a href="#">친환경건축과</a></dd>
+							<dd><a href="#">공간디자인과</a></dd>
+							<dd><a href="#">약손명가미용과</a></dd>
+							<dd><a href="#">준오헤어디자인과</a></dd>
+						</dl>
+						<dl>
+							<dt>전공심화학과</dt>
+							<dd><a href="#">유아교육과</a></dd>
+							<dd><a href="#">의료미용과</a></dd>
+							<dd><a href="#">의료복지과</a></dd>
+							<dd><a href="#">치위생과</a></dd>
+							<dd><a href="#">작업치료과</a></dd>
+							<dd><a href="#">임상병리과</a></dd>
+							<dd><a href="#">물리치료과</a></dd>
+						</dl>
+						<dl>
+							<dt>신설학과</dt>
+							<dd><a href="#">물리치료과</a></dd>
+						</dl>
+					</div>
+				</div>
+				<hr />
+
+				<div id="footers">
+					<div class="foot_wrap">
+						<p class="qr_code"><a href="#"><img src="../../images/common/foot_logo.gif" alt="" /></a></p>
+						<div class="info">
+							<ul>
+								<li><a href="#"><img src="../../images/common/footer_menu3.gif" alt="개인정보보호정책" /></a></li>
+								<li><a href="#"><img src="../../images/common/footer_menu4.gif" alt="이메일무단수집거부" /></a></li>
+								<li class="last"><a href="#"><img src="../../images/common/footer_menu5.gif" alt="홈페이지개선의견" /></a></li>
+							</ul>
+							<address><img src="../../images/common/footer_address.gif" alt="남양주캠퍼스  (우)472-948 경기도 남양주시 진접읍 경복대로 425 / Tel:031-570-9901~6 / FAX :031-570-9929 포천캠퍼스     (우)487-717 경기도 포천시 신북면 신평로 154 / Tel:031-531-9901~6 / FAX:031-531-9908 COPYRIGHT(C) 2013 KYUNGBOK UNIVERSITY.  ALL RIGHTS RESERVED." /></address>
+						</div>
+						<div class="selects">
+							<div class="select_style1" style="width:197px;">
+								<p class="button"><a href="#">학과바로가기</a></p>
+								<ul>
+									<li><a href="#" target="_blank" title="링크1 - 새 창">링크1</a></li>
+									<li><a href="#" target="_blank" title="링크2 - 새 창">링크2</a></li>
+									<li><a href="#" target="_blank" title="링크3 - 새 창">링크3</a></li>
+									<li><a href="#" target="_blank" title="링크4 - 새 창">링크4</a></li>
+									<li><a href="#" target="_blank" title="링크5 - 새 창">링크5</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="m_foot">
+						<div class="menus">
+							<p><a href="#" class="find_way"><img src="../../images/common/m_foot1.gif" alt="찾아오시는 길" /></a></p>
+							<p><a href="#"><img src="../../images/common/m_foot2.gif" alt="PC 버전" /></a></p>
+						</div>
+						<p class="copyright">Copyright (c) 2014 KYUNGBOK UNIVERSITY. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+			<div class="main_wrap" id="main_tab_cont2" style="position:absolute; top:-9999px; left:-9999px;">
+				<iframe src="http://news.kbu.ac.kr/" border="0" frameborder="0" marginwidth="0" marginheight="0" height="100%" allowtransparency="true" scrolling="no"></iframe>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
